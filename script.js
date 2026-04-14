@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Hamburger menu ── */
   const hamburger = document.getElementById('hamburger');
-  const navLinks  = document.getElementById('navLinks');
+  const navLinks = document.getElementById('navLinks');
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
     document.addEventListener('click', (e) => {
@@ -117,9 +117,9 @@ function buildPlan(energy, sleep, time, urgency, subject) {
 /* Handle planner form submit */
 function handlePlanner(e) {
   e.preventDefault();
-  const energy  = parseInt(document.getElementById('energy').value);
-  const sleep   = parseFloat(document.getElementById('sleep').value) || 7;
-  const time    = parseFloat(document.getElementById('timeAvail').value) || 2;
+  const energy = parseInt(document.getElementById('energy').value);
+  const sleep = parseFloat(document.getElementById('sleep').value) || 7;
+  const time = parseFloat(document.getElementById('timeAvail').value) || 2;
   const urgency = document.getElementById('urgency').value;
   const subject = document.getElementById('subject').value.trim() || 'Study Session';
 
@@ -145,7 +145,7 @@ function renderPlan(p) {
   /* Low sleep warning */
   const warn = p.sleep < 6
     ? `<div style="background:rgba(224,92,92,.12);border:1.5px solid rgba(224,92,92,.25);border-radius:14px;padding:.75rem 1rem;margin-bottom:1.2rem;font-size:.83rem;color:#ffb3b3;">
-        ⚠️ <strong>Low sleep detected (${p.sleep}h).</strong> Work blocks shortened by ${Math.round((1 - p.sm) * 100)}% to protect your focus.
+       <strong>Low sleep detected (${p.sleep}h).</strong> Work blocks shortened by ${Math.round((1 - p.sm) * 100)}% to protect your focus.
        </div>` : '';
 
   document.getElementById('resultsContent').innerHTML = `
@@ -175,7 +175,7 @@ function renderPlan(p) {
 
   /* Session schedule table */
   let t = new Date(); t.setSeconds(0, 0);
-  const fmt  = d => d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+  const fmt = d => d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
   const addM = (d, m) => new Date(d.getTime() + m * 60000);
 
   const rows = p.blocks.map(b => {
@@ -199,11 +199,11 @@ function renderPlan(p) {
    ============================================== */
 function handleContact(e) {
   e.preventDefault();
-  const name    = document.getElementById('fullName').value.trim();
-  const email   = document.getElementById('email').value.trim();
+  const name = document.getElementById('fullName').value.trim();
+  const email = document.getElementById('email').value.trim();
   const subject = document.getElementById('subject_c').value;
   const message = document.getElementById('message').value.trim();
-  const terms   = document.getElementById('terms').checked;
+  const terms = document.getElementById('terms').checked;
 
   if (!name || !email || !subject || !message) {
     alert('Please fill in all required fields.'); return;
