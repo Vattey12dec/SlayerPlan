@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PomoPlan - A Student-Focused Study Session Advisor</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">PomoPlan</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-blob-1"></div>
+      <div class="hero-blob-2"></div>
+      <div class="hero-inner">
+        <div class="fu">
+          <div class="hero-badge">Study Smarter Every Day</div>
+          <h1>Plan smarter,<br><em>studying better.</em></h1>
+          <p class="hero-sub">
+            PomoPlan combines task planning with a focus timer so you can stay organised,
+            avoid distractions, and complete your work more efficiently — every single day.
+          </p>
+          <div class="hero-actions">
+            <a href="planner.html" class="btn btn-primary">Build My Plan</a>
+            <a href="about.html" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+        <!-- Image required -->
+        <div class="hero-img fu2">
+          <img
+            src="assets/images/cover.jpg"
+            alt="Students studying together at a desk with notebooks and laptops"
+          />
+        </div>
+      </div>
+    </section>
+
+    <div class="wave wave-hero">
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffffff" d="M0,40 C240,0 480,60 720,30 C960,0 1200,60 1440,20 L1440,60 L0,60 Z"/>
+      </svg>
+    </div>
+
+    <!-- WHAT IS POMOPLAN -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="about-intro-grid">
+          <article class="fu">
+            <span class="eyebrow">What is PomoPlan?</span>
+            <h2>Your personalised study session advisor</h2>
+            <p>
+              PomoPlan is a website that helps you manage time and stay focused.
+              It combines task planning with a focus timer so you can stay organised,
+              avoid distractions, and complete your work more efficiently.
+            </p>
+            <p>
+              By taking inputs such as your energy level, time available, deadline urgency,
+              and sleep hours, PomoPlan generates a study plan for the day — including
+              Pomodoro blocks and suggested break timing for each session.
+            </p>
+            <a href="planner.html" class="btn btn-primary">Try the Planner</a>
+          </article>
+          <div class="fu2">
+            <div class="bubble-card what-you-get-card">
+              <h3>What you get</h3>
+              <!-- Unordered list with CSS bullet points -->
+              <ul class="what-you-get-list">
+                <li>Personalised Pomodoro schedule for today</li>
+                <li>Work blocks adapted to your energy level</li>
+                <li>Break timing adjusted by deadline urgency</li>
+                <li>Sleep-aware session length calculation</li>
+                <li>Visual session schedule table with time slots</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave wave-white">
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#eaf4ff" d="M0,20 C360,60 720,0 1080,40 C1260,60 1380,20 1440,30 L1440,60 L0,60 Z"/>
+      </svg>
+    </div>
+
+    <!-- FEATURES -->
+    <section class="section bg-sky">
+      <div class="section-inner">
+        <div class="text-center">
+          <span class="eyebrow">Features</span>
+          <h2>Everything you need to stay focused</h2>
+          <p class="section-sub section-sub-center">
+            PomoPlan adapts the Pomodoro method to how you actually feel — not just a static timer.
+          </p>
+        </div>
+        <div class="card-grid">
+          <div class="bubble-card fu">
+            <div class="card-icon"><img src="assets/images/icons/energy.svg" alt="Energy icon"/></div>
+            <h3>Energy-Aware Sessions</h3>
+            <p>Work blocks are shorter when you're tired and longer when you're at peak — automatically.</p>
+          </div>
+          <div class="bubble-card fu2">
+            <div class="card-icon"><img src="assets/images/icons/deadline.svg" alt="Deadline icon"/></div>
+            <h3>Deadline Urgency Mode</h3>
+            <p>Critical deadline today? PomoPlan tightens your schedule with shorter breaks and focused blocks.</p>
+          </div>
+          <div class="bubble-card fu3">
+            <div class="card-icon"><img src="assets/images/icons/sleep.svg" alt="Sleep icon"/></div>
+            <h3>Sleep-Adjusted Plan</h3>
+            <p>Low on sleep? Session lengths are reduced to protect your cognitive performance automatically.</p>
+          </div>
+          <div class="bubble-card fu">
+            <div class="card-icon"><img src="assets/images/icons/clock.svg" alt="Clock icon"/></div>
+            <h3>Pomodoro Framework</h3>
+            <p>Built on the proven Pomodoro Technique — dynamically adapted to your unique inputs each session.</p>
+          </div>
+          <div class="bubble-card fu2">
+            <div class="card-icon"><img src="assets/images/icons/schedule.svg" alt="Schedule icon"/></div>
+            <h3>Visual Schedule Table</h3>
+            <p>See your entire session in a clear timeline table with time slots, block types, and tasks.</p>
+          </div>
+          <div class="bubble-card fu3">
+            <div class="card-icon"><img src="assets/images/icons/device.svg" alt="Device icon"/></div>
+            <h3>Works on Any Device</h3>
+            <p>Fully responsive design — use it on your laptop in the library or on your phone on the bus.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave bg-sky">
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffffff" d="M0,30 C480,60 960,0 1440,40 L1440,60 L0,60 Z"/>
+      </svg>
+    </div>
+
+    <!-- HOW IT WORKS (ordered list required) -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="text-center">
+          <span class="eyebrow">How It Works</span>
+          <h2>Three steps to a better study session</h2>
+          <p class="section-sub section-sub-center">
+            Getting your personalised plan takes less than 30 seconds.
+          </p>
+        </div>
+        <div class="steps">
+          <div class="step fu">
+            <div class="step-num">1</div>
+            <h4>Enter your details</h4>
+            <p>Tell us your energy (1–10), sleep hours, time available, and deadline urgency.</p>
+          </div>
+          <div class="step fu2">
+            <div class="step-num">2</div>
+            <h4>Get your plan</h4>
+            <p>Our algorithm instantly builds a Pomodoro schedule tailored exactly to your situation.</p>
+          </div>
+          <div class="step fu3">
+            <div class="step-num">3</div>
+            <h4>Study and succeed</h4>
+            <p>Follow your colour-coded timeline block by block and check off completed sessions.</p>
+          </div>
+        </div>
+        <!-- Ordered list required -->
+        <div class="bubble-card quickstart-card">
+          <h3>Quick start checklist</h3>
+          <ol class="quickstart-list">
+            <li>Open the <a href="planner.html">Planner page</a></li>
+            <li>Rate your energy level using the slider (1–10)</li>
+            <li>Enter last night's sleep hours and time available today</li>
+            <li>Select your deadline urgency level</li>
+            <li>Optionally add your subject or task name</li>
+            <li>Hit <strong>"Build My Study Plan"</strong> and start studying!</li>
+          </ol>
+        </div>
+        <div class="text-center mt-2">
+          <a href="planner.html" class="btn btn-primary">Start Now</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave wave-white">
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#edf6e5" d="M0,10 C480,50 960,0 1440,30 L1440,60 L0,60 Z"/>
+      </svg>
+    </div>
+
+    <!-- POMODORO PRESET TABLE (required) -->
+    <section class="section bg-green">
+      <div class="section-inner">
+        <span class="eyebrow">Reference</span>
+        <h2>Pomodoro presets by energy level</h2>
+        <p class="section-sub">How PomoPlan adjusts your work and break blocks — all calculated automatically.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Energy Level</th>
+                <th>Work Block</th>
+                <th>Short Break</th>
+                <th>Long Break</th>
+                <th>Recommended Strategy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1–3 Low</td>
+                <td>15 min</td>
+                <td>10 min</td>
+                <td>20 min</td>
+                <td>Gentle pacing — short, manageable bursts</td>
+              </tr>
+              <tr>
+                <td>4–6 Medium</td>
+                <td>25 min</td>
+                <td>5 min</td>
+                <td>15 min</td>
+                <td>Classic Pomodoro — steady and consistent</td>
+              </tr>
+              <tr>
+                <td>7–8 High</td>
+                <td>30 min</td>
+                <td>5 min</td>
+                <td>15 min</td>
+                <td>Extended focus with fewer interruptions</td>
+              </tr>
+              <tr>
+                <td>9–10 Peak</td>
+                <td>45 min</td>
+                <td>10 min</td>
+                <td>20 min</td>
+                <td>Deep work — long, immersive flow blocks</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Pomo<span>Plan</span></div>
+        <div class="footer-tagline">Study smarter. Focus better. Achieve more.</div>
+      </div>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="planner.html">Planner</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
