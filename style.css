@@ -20,6 +20,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden; /* FIX: prevent any horizontal scroll on the body */
 }
 
 /* ── Typography ── */
@@ -68,10 +69,6 @@ a:hover {
   color: #6fa3e0;
   text-decoration: underline;
 }
-/* 
-a:visited {
-  color: #2d58a0;
-} */
 
 a:active {
   color: #e05c5c;
@@ -259,7 +256,6 @@ main {
 /* ── SECTIONS ── */
 .section {
   padding: 5rem 2rem;
- 
 }
 
 .section-inner {
@@ -312,7 +308,6 @@ main {
   display: grid;
   grid-template-columns: repeat(3, minmax(240px, 1fr));
   gap: 1.5rem;
- 
 }
 
 .bubble-card {
@@ -477,6 +472,8 @@ main {
   overflow-x: auto;
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(57, 113, 184, 0.10);
+  /* FIX: ensure the table-wrap never forces its parent wider than available space */
+  max-width: 100%;
 }
 
 table {
@@ -484,6 +481,8 @@ table {
   border-collapse: collapse;
   background: #ffffff;
   font-size: 0.88rem;
+  /* FIX: table must not exceed its container */
+  min-width: 0;
 }
 
 thead tr {
@@ -707,6 +706,9 @@ input[type="checkbox"] {
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 2rem;
+  /* FIX: prevent section from expanding past viewport */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* ── PLANNER GRID ── */
@@ -715,7 +717,16 @@ input[type="checkbox"] {
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
   align-items: start;
+  /* FIX: critical — without this, grid children sized by content can bust the grid width */
+  min-width: 0;
 }
+
+/* FIX: both columns must be allowed to shrink below their content size */
+.planner-grid > * {
+  min-width: 0;
+  overflow: hidden;
+}
+
 /* ── RESULTS PANEL ── */
 .results-panel {
   background: linear-gradient(135deg, #3971b8 0%, #2d5fa0 100%);
@@ -724,6 +735,9 @@ input[type="checkbox"] {
   color: #ffffff;
   box-shadow: 0 10px 44px rgba(57, 113, 184, 0.25);
   min-height: 290px;
+  /* FIX: panel must never push its column wider */
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .results-panel h3 {
@@ -921,13 +935,9 @@ input[type="checkbox"] {
 }
 
 .hero-img {
-  margin-top:-30px;
+  margin-top: -30px;
   margin-right: 5px;
-  /* border-radius: 24px; */
   overflow: hidden;
-  /* box-shadow: 0 12px 48px rgba(57, 113, 184, 0.18);
-  border: 3px solid rgba(255, 255, 255, 0.80); */
-  /* margin-left: 3rem; */
 }
 
 .hero-img img {
@@ -1350,6 +1360,43 @@ audio {
   animation: fadeUp 0.55s 0.18s ease both;
 }
 
+/* ── WAVE BACKGROUND COLORS ── */
+.wave-hero {
+  background: linear-gradient(135deg, #eaf4ff, #fdf6d8, #edf6e5);
+}
+
+.wave-white {
+  background: #ffffff;
+}
+
+.wave-sky {
+  background: #eaf4ff;
+}
+
+.wave-green-section {
+  background: #edf6e5;
+}
+
+.wave-vanilla-section {
+  background: #fdf6d8;
+}
+
+.section-sub-center {
+  margin: 0 auto 2.75rem;
+}
+
+.schedule-wrap-hidden {
+  display: none;
+  margin-top: 1.75rem;
+  /* FIX: table inside must never push this container wider */
+  overflow: hidden;
+  min-width: 0;
+}
+
+.results-content-hidden {
+  display: none;
+}
+
 /* ── RESPONSIVE — Tablet 960px ── */
 @media (max-width: 960px) {
   .hero-inner,
@@ -1357,15 +1404,52 @@ audio {
   .about-intro-grid {
     grid-template-columns: 1fr;
   }
+
+  .hero-img {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
   .planner-section-inner {
     padding: 0 1.25rem;
   }
-}
 
-/* ── Contact grid collapses later (720px) ── */
-@media (max-width: 720px) {
+  /* FIX: restore normal overflow when stacked — right column becomes full-width */
+  .planner-grid > * {
+    overflow: visible;
+  }
+
+  /* FIX: schedule table can scroll horizontally within its own container */
+  .schedule-wrap-hidden {
+    overflow: visible;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .contact-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ── RESPONSIVE — Tablet narrow 720px ── */
+@media (max-width: 720px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .table-wrap {
+    font-size: 0.82rem;
+  }
+
+  td {
+    white-space: normal;
+    min-width: 100px;
   }
 }
 
@@ -1406,7 +1490,11 @@ audio {
     padding: 3.5rem 1.25rem;
   }
 
-  .form-bubble,
+  .form-bubble {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
   .results-panel {
     padding: 1.5rem;
   }
@@ -1415,9 +1503,40 @@ audio {
     padding: 4rem 1.25rem 2.5rem;
   }
 
+  .hero-img {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
   .footer-inner {
     flex-direction: column;
+    align-items: center;
     text-align: center;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 1rem;
   }
 
   .audio-card {
@@ -1425,41 +1544,50 @@ audio {
     text-align: center;
   }
 
+  .audio-info {
+    min-width: unset;
+    width: 100%;
+  }
+
+  fieldset {
+    padding: 1rem;
+  }
+
+  .form-bubble h2 {
+    font-size: 1.4rem;
+  }
+
   h1 {
     font-size: 1.8rem;
   }
-}
 
-/* ── WAVE BACKGROUND COLORS ── */
-.wave-hero {
-  background: linear-gradient(135deg, #eaf4ff, #fdf6d8, #edf6e5);
-}
+  .chips {
+    gap: 0.35rem;
+  }
 
-.wave-white {
-  background: #ffffff;
-}
+  .quickstart-card {
+    padding: 0;
+  }
 
-.wave-sky {
-  background: #eaf4ff;
-}
+  .info-row {
+    gap: 0.65rem;
+  }
 
-.wave-green-section {
-  background: #edf6e5;
-}
+  .r-block p {
+    font-size: 0.82rem;
+    word-break: break-word;
+  }
 
-.wave-vanilla-section {
-  background: #fdf6d8;
-}
+  /* table cells wrap */
+  td {
+    white-space: normal;
+    min-width: 80px;
+    font-size: 0.78rem;
+    padding: 0.6rem 0.75rem;
+  }
 
-.section-sub-center {
-  margin: 0 auto 2.75rem;
-}
-
-.schedule-wrap-hidden {
-  display: none;
-  margin-top: 1.75rem;
-}
-
-.results-content-hidden {
-  display: none;
+  thead th {
+    font-size: 0.72rem;
+    padding: 0.75rem;
+  }
 }
