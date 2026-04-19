@@ -23,49 +23,32 @@ document.addEventListener('DOMContentLoaded', function() {
   if (contactForm) contactForm.addEventListener('submit', handleContact);
 });
 
-/* ==============================================
-   POMODORO ALGORITHM
-   ============================================== */
+/* pomo algorithm */
 
-/*
-  POMODORO RULES (corrected):
-  - Work block length = based on energy (base) × sleep modifier
-  - Short break (5 or 8 min base) × sleep modifier — after each work block
-  - Long break (15 or 20 min base) × sleep modifier — replaces short break after every 4th pomo
-  - No trailing break after the final work block
-  - Urgency affects strategy tip ONLY, not any timings
-  - Sessions too short for even one work block show a clear error message
-*/
-
-/* Sleep modifier — scales ALL timings when sleep is low */
 function sleepMod(hours) {
-  if (hours >= 8) return 1.0;   // well rested — full length
-  if (hours >= 6) return 0.9;   // slightly tired — 10% shorter
-  if (hours >= 4) return 0.75;  // tired — 25% shorter
-  return 0.6;                   // very tired — 40% shorter
+  if (hours >= 8) return 1.0;   
+  if (hours >= 6) return 0.9;   
+  if (hours >= 4) return 0.75;  
+  return 0.6;                   
 }
 
-/* Work block length — energy sets base, sleep scales it
-   FIX: low=15 (was 20), peak=45 (was 35) — now matches reference table */
 function workBlock(energy, sleep) {
   var base;
-  if (energy <= 3)      base = 15;  // low energy: short, manageable bursts
-  else if (energy <= 6) base = 25;  // medium: classic Pomodoro
-  else if (energy <= 8) base = 30;  // high: extended focus
-  else                  base = 45;  // peak: deep work, immersive flow blocks
+  if (energy <= 3)      base = 15;  
+  else if (energy <= 6) base = 25;  
+  else if (energy <= 8) base = 30;  
+  else                  base = 45;  
   return Math.round(base * sleepMod(sleep));
 }
 
-/* Short break — FIX: low=10 (was 8), peak=10 (was 5) — now matches reference table */
 function shortBreak(energy, sleep) {
   var base;
-  if (energy <= 3)      base = 10;  // low energy: longer short break
-  else if (energy <= 8) base = 5;   // medium / high: standard
-  else                  base = 10;  // peak: longer short break
+  if (energy <= 3)      base = 10;  
+  else if (energy <= 8) base = 5;   
+  else                  base = 10;  
   return Math.round(base * sleepMod(sleep));
 }
 
-/* Long break — FIX: peak=20 (was 15) — now matches reference table */
 function longBreak(energy, sleep) {
   var base;
   if (energy <= 3)      base = 20;  // low energy
@@ -74,7 +57,6 @@ function longBreak(energy, sleep) {
   return Math.round(base * sleepMod(sleep));
 }
 
-/* Strategy message — urgency affects motivational tip only, NOT timings */
 function getStrategy(urgency, energy) {
   var strategies = {
     critical: [
@@ -109,18 +91,7 @@ function energyBadge(e) {
   return '<span class="badge b-green"><img src="assets/images/icons/momentum.svg" alt="high energy" style="width:12px;height:12px;vertical-align:middle;margin-right:3px;"> High</span>';
 }
 
-/*
-  Build the full Pomodoro plan.
-
-  Loop logic (corrected):
-  1. If elapsed + wb > totalMins  →  not enough time for another work block, stop.
-  2. Add work block, increment count and elapsed.
-  3. Determine break type (long every 4th, short otherwise).
-  4. Only add a break if BOTH conditions are true:
-       a. The break itself fits in remaining time.
-       b. At least one more full work block also fits after the break.
-     If either condition fails, we are done — stop cleanly without a trailing break.
-*/
+/* full pomodoro plan*/
 function buildPlan(energy, sleep, time, urgency, subject) {
   var totalMins = Math.round(time * 60);
   var wb = workBlock(energy, sleep);
@@ -128,7 +99,7 @@ function buildPlan(energy, sleep, time, urgency, subject) {
   var lb = longBreak(energy, sleep);
   var sm = sleepMod(sleep);
 
-  /* Guard: session shorter than the minimum work block */
+  
   if (totalMins < wb) {
     return { tooShort: true, wb: wb, subject: subject };
   }
@@ -138,12 +109,12 @@ function buildPlan(energy, sleep, time, urgency, subject) {
   var count   = 0;
 
   while (elapsed + wb <= totalMins) {
-    /* Add work block */
+    
     count++;
     blocks.push({ type: 'work', duration: wb, index: count });
     elapsed += wb;
 
-    /* Determine break after this work block */
+ 
     var isLong = (count % 4 === 0);
     var br     = isLong ? lb : sb;
 
@@ -151,11 +122,11 @@ function buildPlan(energy, sleep, time, urgency, subject) {
     var nextWorkFits = (elapsed + br + wb <= totalMins);
 
     if (breakFits && nextWorkFits) {
-      /* Break fits and there is at least one more work block — add it */
+
       blocks.push({ type: 'break', duration: br, index: count, isLong: isLong });
       elapsed += br;
     } else {
-      /* No more full work blocks possible — end session cleanly, no trailing break */
+
       break;
     }
   }
@@ -212,7 +183,7 @@ function renderPlan(p) {
   document.getElementById('resultsContent').style.display = 'block';
   document.getElementById('scheduleWrap').style.display   = 'block';
 
-  /* Pomodoro chips */
+  /* pomo chips */
   var chips = p.blocks.map(function(b) {
     if (b.type === 'work') {
       return '<span class="chip chip-w"><img src="assets/images/icons/clock.svg" alt="work" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;"> Pomo ' + b.index + ' · ' + b.duration + 'm</span>';
@@ -298,9 +269,7 @@ function renderPlan(p) {
     '</table>';
 }
 
-/* ==============================================
-   CONTACT FORM
-   ============================================== */
+/* contact form*/
 function handleContact(e) {
   e.preventDefault();
   var name    = document.getElementById('fullName').value.trim();

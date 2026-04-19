@@ -20,10 +20,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden; /* FIX: prevent any horizontal scroll on the body */
+  overflow-x: hidden; 
 }
 
-/* ── Typography ── */
 h1, h2, h3, h4 {
   font-family: 'Comfortaa', cursive;
   line-height: 1.25;
@@ -91,7 +90,6 @@ img {
   height: auto;
 }
 
-/* ── Main content wrapper ── */
 main {
   flex: 1;
 }
@@ -1397,7 +1395,7 @@ audio {
   display: none;
 }
 
-/* ── RESPONSIVE — Tablet 960px ── */
+/* Tablet 960px ── */
 @media (max-width: 960px) {
   .hero-inner,
   .planner-grid,
@@ -1414,12 +1412,11 @@ audio {
     padding: 0 1.25rem;
   }
 
-  /* FIX: restore normal overflow when stacked — right column becomes full-width */
+  
   .planner-grid > * {
     overflow: visible;
   }
 
-  /* FIX: schedule table can scroll horizontally within its own container */
   .schedule-wrap-hidden {
     overflow: visible;
   }
@@ -1433,7 +1430,7 @@ audio {
   }
 }
 
-/* ── RESPONSIVE — Tablet narrow 720px ── */
+/* Tablet narrow 720px ── */
 @media (max-width: 720px) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1453,7 +1450,7 @@ audio {
   }
 }
 
-/* ── RESPONSIVE — Mobile 620px ── */
+/* Mobile 620px ── */
 @media (max-width: 620px) {
   .site-nav {
     padding: 0 1rem;
